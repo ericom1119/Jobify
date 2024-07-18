@@ -1,5 +1,10 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import "./index.css";
 import UserLogin from "./pages/userLogin";
 import Homepage from "./pages/Home";
@@ -22,6 +27,8 @@ export default function App() {
     const token = localStorage.getItem("token");
     if (token) {
       dispatch({ type: LOGIN_SUCCESS, payload: { token } });
+    } else {
+      localStorage.removeItem("token");
     }
   }, [dispatch]);
 
@@ -33,7 +40,7 @@ export default function App() {
           path="/viewJob/:id"
           element={
             <PrivateRoute>
-              <ViewJob />{" "}
+              <ViewJob />
             </PrivateRoute>
           }
         />
@@ -53,7 +60,6 @@ export default function App() {
             </PrivateRoute>
           }
         />
-
         <Route
           path="/addcompany"
           element={
@@ -62,7 +68,6 @@ export default function App() {
             </PrivateRoute>
           }
         />
-
         <Route
           path="/editCompany/:id"
           element={
@@ -71,12 +76,11 @@ export default function App() {
             </PrivateRoute>
           }
         />
-
         <Route
           path="/viewCompany/:id"
           element={
             <PrivateRoute>
-              <ViewCompany />{" "}
+              <ViewCompany />
             </PrivateRoute>
           }
         />
@@ -90,6 +94,7 @@ export default function App() {
             </PrivateRoute>
           }
         />
+        <Route path="/" element={<Navigate to="/login" />} />
       </Routes>
     </Router>
   );
