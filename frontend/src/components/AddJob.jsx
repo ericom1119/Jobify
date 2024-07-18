@@ -5,6 +5,7 @@ import { useNavigate, Link } from "react-router-dom";
 import Sidenav from "../components/Sidenav";
 import { Box } from "@mui/material";
 import { Form, Button } from "react-bootstrap";
+import Swal from "sweetalert2";
 
 const AddJob = () => {
   const [jobData, setJobData] = useState({
@@ -26,7 +27,14 @@ const AddJob = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(addJob(jobData));
-    navigate("/Managejobs");
+    Swal.fire({
+      title: "Success!",
+      text: "Job successfully saved!",
+      icon: "success",
+      confirmButtonText: "OK",
+    }).then(() => {
+      navigate("/Managejobs");
+    });
   };
 
   return (

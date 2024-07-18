@@ -27,6 +27,16 @@ export const addCompany = (companyData) => async (dispatch) => {
   }
 };
 
+export const checkCompanyExists = (name) => async () => {
+  try {
+    const response = await api.get(`/checkCompanyExists?name=${name}`);
+    return response.data.exists;
+  } catch (error) {
+    console.error("Error checking Company existence:", error);
+    return false;
+  }
+};
+
 export const updateCompany =
   (companyId, updatedCompanyData) => async (dispatch) => {
     try {

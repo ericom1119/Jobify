@@ -5,6 +5,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import Sidenav from "../components/Sidenav";
 import { Box } from "@mui/material";
 import { Form, Button } from "react-bootstrap";
+import Swal from "sweetalert2";
 
 const EditJob = () => {
   const { id } = useParams();
@@ -46,7 +47,14 @@ const EditJob = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(updateJob(id, jobData));
-    navigate("/manageJobs");
+    Swal.fire({
+      title: "Success!",
+      text: "Job successfully updated!",
+      icon: "success",
+      confirmButtonText: "OK",
+    }).then(() => {
+      navigate("/Managejobs");
+    });
   };
 
   return (

@@ -5,6 +5,7 @@ import { useParams, useNavigate, Link } from "react-router-dom";
 import Sidenav from "../components/Sidenav";
 import { Box } from "@mui/material";
 import { Form, Button } from "react-bootstrap";
+import Swal from "sweetalert2";
 
 const EditCompany = () => {
   const { id } = useParams();
@@ -49,7 +50,14 @@ const EditCompany = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(updateCompany(id, companyData));
-    navigate("/manageCompany");
+    Swal.fire({
+      title: "Success!",
+      text: "Company successfully updated!",
+      icon: "success",
+      confirmButtonText: "OK",
+    }).then(() => {
+      navigate("/ManageCompany");
+    });
   };
 
   return (
